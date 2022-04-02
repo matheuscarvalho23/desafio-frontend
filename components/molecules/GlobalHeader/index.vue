@@ -1,14 +1,16 @@
 <template>
-    <div class="bg-white flex justify-between items-center p-6 shadow-sm ">
-        <div class="flex w-full">
-            <h1 class="text-3xl ml-20 text-indigo-900 font-semibold">
-                Your<span class="text-indigo-300">Video</span>
-            </h1>
+    <div class="w-full bg-white">
+        <div class="bg-white flex justify-between m-0-auto items-center pt-6 pb-6 m-auto max-w-7xl">
+            <div class="flex w-full">
+                <h1 class="text-3xl text-indigo-900 font-semibold">
+                    Your<span class="text-indigo-300">Video</span>
+                </h1>
 
-            <input-search class="ml-20" @search="search" />
+                <input-search class="ml-20" @search="search" />
+            </div>
+
+            <a href="" class="text-indigo-900">Entrar</a>
         </div>
-
-        <a href="" class="text-indigo-900">Entrar</a>
     </div>
 </template>
 
