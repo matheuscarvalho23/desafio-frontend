@@ -1,21 +1,12 @@
 <template>
   <div>
-    <global-header />
+    <global-header @search="search" />
 
-    <div class="mt-20 max-w-7xl m-auto flex justify-between">
-      <featured title="Video de minecraft" width="w-3/4" height="h-96" />
-      <featured title="Títulos Semelhantes" width="w-2/4" height="h-96" class="ml-5">
-        <template slot="body">
-          <videos-list v-for="(moreVideos, index) in 8" :key="index" />
-        </template>
-      </featured>
-    </div>
-
-    <div class="mt-5 max-w-7xl m-auto mb-5">
+    <div class="mt-10 max-w-7xl m-auto mb-5">
       <featured title="Em alta" width="w-full">
         <template slot="body">
-          <div class="grid grid-rows-3 grid-flow-col gap-4">
-            <videos-list v-for="(moreVideos, index) in 9" :key="index" />
+          <div class="grid cursor-pointer">
+            <videos-list v-for="(item, index) in highVideos.items" :key="index" :data="item" />
           </div>
         </template>
       </featured>
@@ -24,12 +15,33 @@
 </template>
 
 <script>
+import { listVideos } from '@/services/api';
+
+
 export default {
   name: 'home',
   data() {
     return {
-      moreVideos: []
+      moreVideos: [],
+      highVideos: []
     }
+  },
+  created() {
+    localStorage.setItem('searchs', JSON.stringify([]));
+  },
+  mounted() {
+    this.listVideos();
+  },
+  methods: {
+    search(term) {
+      this.$router.push(`/search?term=${term}`);
+    },
+    listVideos() {
+      listVideos()
+        .then(response => {
+          this.highVideos = response.data;
+        })
+    },
   }
 }
 </script>
